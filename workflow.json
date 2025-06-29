@@ -1,0 +1,144 @@
+{
+  "name": "My workflow 2",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -480,
+        -140
+      ],
+      "id": "601f3e91-1f37-4256-bf18-c759bd3280eb",
+      "name": "When chat message received",
+      "webhookId": "71aa07fb-c37d-40e0-8429-8641ce5b01be"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        -260,
+        -140
+      ],
+      "id": "9cf0c28e-3179-4a18-a057-161d6426fd75",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -300,
+        40
+      ],
+      "id": "dc54bc0a-b03c-4ce0-8e53-1a6952a80389",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "SpbJdXOrEGtfBRNc",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -140,
+        40
+      ],
+      "id": "fc49fda3-26b1-4638-87cd-e3d6f6aef4a0",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "url": "https://8ec0-45-112-136-210.ngrok-free.app/containers",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        0,
+        40
+      ],
+      "id": "d2ef0303-9afe-4285-9cba-7b77ec865e27",
+      "name": "Docker_FastAPi"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        []
+      ]
+    },
+    "Docker_FastAPi": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "864da338-a4c6-4425-adc0-6af23418cb84",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "df14d2549e33bd964a0ff021aa6d0a5341f1f4f0562d200ef55489ff4ff3edd1"
+  },
+  "id": "aBz8qUpLyP34g0z3",
+  "tags": []
+}
